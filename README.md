@@ -1,2 +1,2 @@
 # My-works-Portfolio
-A curated collection of my academic projects, personal experiments, and professional tools. This space showcases my journey through software development, focusing on clean code, algorithm efficiency, and problem-solving.
+This is where my ideas are put into code. From simple command-line tools to complex data structures, this is a record of my progress and the technical challenges I've solved. Feel free to experiment and break things!
