@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # David — портфолио (React + Vite)
 
 ## Запуск локально
@@ -39,3 +40,7 @@ npm run build
 3. Добавь в `package.json` в `scripts`: `"deploy": "npm run build && npx gh-pages -d dist"`
 4. Выполни `npm run deploy`.
 5. Включи GitHub Pages в настройках репозитория (ветка `gh-pages`).
+=======
+# My-works-Portfolio
+This is where my ideas are put into code. From simple command-line tools to complex data structures, this is a record of my progress and the technical challenges I've solved. Feel free to experiment and break things!
+>>>>>>> 2743c9ad13e1519eb6effb7bb9e3b24a469eee1f
