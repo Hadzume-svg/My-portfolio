@@ -1,55 +1,74 @@
-import profile from "../data/profile.js";
+import { usePortfolio } from "../store.jsx";
 
 export default function Hero() {
+  const { data, t, tr } = usePortfolio();
+  const profile = data.profile;
+
   return (
     <section className="hero wrap" id="top">
-      <div className="hero-text">
-        <div className="eyebrow mono">
-          frontend · telegram/discord bots · product design
-        </div>
-        <h1 className="serif">
-          Привет, я {profile.name} —{" "}
-          <em>{profile.tagline.charAt(0).toLowerCase() + profile.tagline.slice(1)}</em>
-        </h1>
-        <p>{profile.intro}</p>
+      <div className="orb" aria-hidden="true" />
 
-        <div className="stack-chips">
-          {profile.stack.map((s) => (
-            <span className="chip mono" key={s}>
-              {s}
+      <div className="hero-grid">
+        <div>
+          <div className="hero-eyebrow mono">
+            <span className="dot" />
+            {tr(profile.role)}
+          </div>
+
+          <h1>
+            {t("hero.title1")}{" "}
+            <span className="accent">{t("hero.title2")}</span>
+          </h1>
+
+          <p className="hero-lead">{tr(profile.tagline)}</p>
+
+          <div className="hero-actions">
+            <a href="#work" className="btn btn-primary">
+              {t("hero.works")}
+            </a>
+            <a href="#contact" className="btn btn-secondary">
+              {t("hero.talk")}
+            </a>
+          </div>
+        </div>
+
+        <aside className="hero-meta">
+          <div className="m-item">
+            <span className="m-label mono">{t("meta.status")}</span>
+            <span className="m-value available">● {tr(profile.status)}</span>
+          </div>
+          <div className="m-item">
+            <span className="m-label mono">{t("meta.experience")}</span>
+            <span className="m-value">{tr(profile.experience)}</span>
+          </div>
+          <div className="m-item">
+            <span className="m-label mono">{t("meta.active")}</span>
+            <span className="m-value">{profile.activeProjects}</span>
+          </div>
+          <div className="m-item">
+            <span className="m-label mono">{t("meta.stack")}</span>
+            <span className="m-value">
+              {profile.stack.slice(0, 4).join(" · ")}
             </span>
-          ))}
-        </div>
-
-        <div className="hero-actions">
-          <a href="#work" className="btn btn-primary">
-            Смотреть работы
-          </a>
-          <a href="#contact" className="btn btn-secondary">
-            Обсудить проект
-          </a>
-        </div>
-
-        <div className="hero-socials mono">
-          <a href={profile.links.telegram} target="_blank" rel="noreferrer">
-            Telegram
-          </a>
-          <a href={profile.links.github} target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-          <a href={profile.links.instagram} target="_blank" rel="noreferrer">
-            Instagram
-          </a>
-          <span className="socials-static">Discord: {profile.links.discord}</span>
-        </div>
+          </div>
+          <div className="m-item">
+            <span className="m-label mono">{t("meta.answer")}</span>
+            <span className="m-value">{tr(profile.answerTime)}</span>
+          </div>
+        </aside>
       </div>
 
-      <div className="hero-photo-frame">
-        <img src={profile.photo} alt={profile.name} className="hero-photo" />
-        <div className="hero-photo-tag mono">
-          {profile.name} — frontend / bots / design
-        </div>
+      <div className="hero-chips">
+        {profile.stack.map((s, i) => (
+          <span className="chip" style={{ "--i": i }} key={s}>
+            {s}
+          </span>
+        ))}
       </div>
+
+      <a href="#services" className="scroll-hint" aria-label="Вниз">
+        ↓
+      </a>
     </section>
   );
 }

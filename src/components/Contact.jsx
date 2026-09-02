@@ -1,43 +1,62 @@
-import profile from "../data/profile.js";
+import useReveal from "../hooks/useReveal.js";
+import { usePortfolio } from "../store.jsx";
 
 export default function Contact() {
+  useReveal();
+  const { data, t } = usePortfolio();
+  const profile = data.profile;
+
   return (
-    <section className="section contact" id="contact">
+    <section className="contact" id="contact">
       <div className="wrap">
-        <span className="section-num mono">04 — Контакты</span>
-        <h2 className="serif">
-          Есть задача по сайту, боту или дизайну?
-          <br />
-          Расскажи — обсудим детали.
-        </h2>
-        <div className="contact-links">
-          <a
-            className="btn btn-primary"
-            href={profile.links.telegram}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Написать в Telegram
-          </a>
-          <a
-            className="btn btn-secondary"
-            href={profile.links.github}
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-          </a>
-          <a
-            className="btn btn-secondary"
-            href={profile.links.instagram}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Instagram
-          </a>
-          <span className="btn btn-secondary socials-static">
-            Discord: {profile.links.discord}
-          </span>
+        <div className="contact-grid">
+          <div className="reveal">
+            <span className="eyebrow mono">{t("contact.label")}</span>
+            <h2>
+              {t("contact.title")}
+              <span className="accent">{t("contact.accent")}</span>
+            </h2>
+            <p className="sub">{t("contact.sub")}</p>
+          </div>
+
+          <div className="contact-links reveal reveal-delay-1">
+            {profile.links.telegram && (
+              <a
+                className="c-link solid"
+                href={profile.links.telegram}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("contact.telegram")} <span className="arr">↗</span>
+              </a>
+            )}
+            {profile.links.github && (
+              <a
+                className="c-link"
+                href={profile.links.github}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("contact.github")} <span className="arr">↗</span>
+              </a>
+            )}
+            {profile.links.instagram && (
+              <a
+                className="c-link"
+                href={profile.links.instagram}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("contact.instagram")} <span className="arr">↗</span>
+              </a>
+            )}
+            {profile.links.discord && (
+              <span className="c-link">
+                {t("contact.discord")} · {profile.links.discord}{" "}
+                <span className="arr">·</span>
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </section>
