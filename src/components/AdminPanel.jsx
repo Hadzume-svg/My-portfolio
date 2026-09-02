@@ -6,7 +6,7 @@ import {
   isSignedIn,
   uploadImage,
 } from "../lib/backend.js";
-import { SITE_ADMIN_EMAIL, supabaseConfigured } from "../config.js";
+import { supabaseConfigured } from "../config.js";
 import profileDefaults from "../data/profile.js";
 import projectsDefaults from "../data/projects.js";
 
@@ -15,7 +15,7 @@ const clone = (o) => JSON.parse(JSON.stringify(o));
 export default function AdminPanel() {
   const [active, setActive] = useState(() => window.location.hash === "#admin");
   const [authed, setAuthed] = useState(false);
-  const [email, setEmail] = useState(SITE_ADMIN_EMAIL);
+  const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [err, setErr] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -94,6 +94,7 @@ export default function AdminPanel() {
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="off"
                   autoFocus
                 />
               </div>
@@ -108,6 +109,7 @@ export default function AdminPanel() {
                   setPwd(e.target.value);
                   setErr(false);
                 }}
+                autoComplete="new-password"
                 autoFocus={!backendOn}
               />
             </div>
