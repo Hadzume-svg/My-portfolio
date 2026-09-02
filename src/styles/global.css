@@ -735,7 +735,7 @@ a {
 }
 .w-row {
   display: grid;
-  grid-template-columns: 1fr 460px;
+  grid-template-columns: minmax(0, 1fr) 460px;
   gap: 44px;
   align-items: center;
   padding: 36px 8px;
@@ -744,6 +744,9 @@ a {
 }
 .w-row:hover {
   background: var(--bg-2);
+}
+.w-row > div:first-child {
+  max-width: 520px;
 }
 .w-row .cat {
   font-family: var(--mono);
