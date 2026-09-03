@@ -3,7 +3,6 @@ import useReveal from "../hooks/useReveal.js";
 import { usePortfolio } from "../store.jsx";
 
 export default function Work() {
-  useReveal();
   const [active, setActive] = useState("all");
   const { data, t, tr } = usePortfolio();
   const categories = data.profile.categories || [];
@@ -15,6 +14,8 @@ export default function Work() {
       : active === "featured"
       ? projects.filter((p) => p.featured)
       : projects.filter((p) => p.category === active);
+
+  useReveal([active]);
 
   const filters = [
     { key: "all", label: null },
