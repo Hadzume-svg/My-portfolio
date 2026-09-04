@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { usePortfolio, ADMIN_PASSCODE } from "../store.jsx";
+import { usePortfolio } from "../store.jsx";
 import {
   signIn,
   signOut,
@@ -53,12 +53,8 @@ export default function AdminPanel() {
         return;
       }
       setAuthed(true);
-    } else if (pwd === ADMIN_PASSCODE) {
-      setAuthed(true);
     } else {
       setErr(true);
-      setBusy(false);
-      return;
     }
     setPwd("");
     setBusy(false);

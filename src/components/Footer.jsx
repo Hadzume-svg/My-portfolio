@@ -77,9 +77,6 @@ export default function Footer() {
             <a className="back" href="#top">
               {t("footer.up")}
             </a>
-            <a className="foot-admin mono" href="#admin" title="Админ">
-              ⚙
-            </a>
           </div>
         </div>
       </div>

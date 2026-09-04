@@ -22,15 +22,13 @@
 //
 // 4. Включи Realtime для таблицы: Database → Replication → tick portfolio_data.
 // 5. В Supabase: Authentication → Users → добавь свой email с паролем
-//    (это вход в админку). Email впиши в SITE_ADMIN_EMAIL ниже (можно оставить
-//    как есть и просто вводить email вручную при входе).
+//    (это вход в админку). Email вводится вручную при входе.
 
 export const SUPABASE_URL = "https://qkcpprgiunublsfixpxi.supabase.co";
 export const SUPABASE_ANON_KEY =
   "sb_publishable_yTuPpDxACLfsVj2qLao3lQ_DsW6K3Be";
 export const SUPABASE_TABLE = "portfolio_data";
 export const SUPABASE_ROW_ID = 1;
-export const SITE_ADMIN_EMAIL = "admin@example.com";
 // Публичный bucket для картинок работ (см. SQL в чате — Storage)
 export const IMG_BUCKET = "portfolio-images";
 

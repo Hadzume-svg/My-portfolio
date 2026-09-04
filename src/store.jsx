@@ -12,8 +12,6 @@ import {
 const KEY = "portfolio-admin-v1";
 const LANG_KEY = "portfolio-lang";
 
-export const ADMIN_PASSCODE = "PASSWD_PLACEHOLDER";
-
 const clone = (o) => JSON.parse(JSON.stringify(o));
 
 function currentData() {
