@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="foot-top">
           <div className="foot-brand">
             <a href="#top" className="logo serif">
-              StackOne
+              David — Portfolio
               <span className="dotk" />
             </a>
             <p>{t("footer.line")}</p>
@@ -72,7 +72,7 @@ export default function Footer() {
         </div>
 
         <div className="foot-bottom">
-          <span>© 2026 StackOne · David. {t("footer.rights")}.</span>
+          <span>© 2026 David — Portfolio. {t("footer.rights")}.</span>
           <div className="foot-right">
             <a className="back" href="#top">
               {t("footer.up")}

@@ -25,7 +25,7 @@ export default function Header() {
     <header className={"header" + (scrolled ? " scrolled" : "")}>
       <nav className="wrap header-nav">
         <a href="#top" className="logo serif">
-          StackOne
+          David — Portfolio
           <span className="dotk" />
         </a>
         <div className="nav-links">
