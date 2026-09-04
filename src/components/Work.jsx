@@ -2,6 +2,20 @@ import { useState } from "react";
 import useReveal from "../hooks/useReveal.js";
 import { usePortfolio } from "../store.jsx";
 
+const KNOWN_KEYS = ["cards", "apps", "frontend", "bot"];
+const DEFAULT_LABEL = {
+  cards: "Карточки",
+  apps: "Приложения и сайты",
+  frontend: "Front-end",
+  bot: "Bot Discord/Telegram",
+};
+const catName = (key, label, t, tr) => {
+  if (KNOWN_KEYS.includes(key) && label === DEFAULT_LABEL[key]) {
+    return t("work." + key);
+  }
+  return tr(label || "");
+};
+
 export default function Work() {
   const [active, setActive] = useState("all");
   const { data, t, tr } = usePortfolio();
@@ -18,9 +32,9 @@ export default function Work() {
   useReveal([active]);
 
   const filters = [
-    { key: "all", label: null },
+    { key: "all", label: null, isAll: true },
     { key: "featured", label: t("work.featured") },
-    ...categories.map((c) => ({ key: c.key, label: c.label })),
+    ...categories.map((c) => ({ key: c.key, label: catName(c.key, c.label, t, tr) })),
   ];
 
   return (
@@ -52,7 +66,9 @@ export default function Work() {
           {visible.map((p) => (
             <article className="w-row reveal" key={p.id}>
               <div>
-                <span className="cat mono">{tr(p.categoryLabel)}</span>
+                <span className="cat mono">
+                  {catName(p.category, p.categoryLabel, t, tr)}
+                </span>
                 <h3>{tr(p.title)}</h3>
                 <p className="desc">{tr(p.description)}</p>
                 <a className="more" href={p.link} target="_blank" rel="noreferrer">

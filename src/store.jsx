@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useRef, useState, useCallback } f
 import profileDefaults from "./data/profile.js";
 import projectsDefaults from "./data/projects.js";
 import { makeI18n, langHtml } from "./i18n.js";
+import { createTranslator } from "./lib/translate.js";
 import {
   fetchRemoteData,
   pushRemoteData,
@@ -90,7 +91,28 @@ export function PortfolioProvider({ children }) {
   const [lang, setLangState] = useState(
     () => localStorage.getItem(LANG_KEY) || "ru"
   );
+  // Онлайн-переводы пользовательского контента (названия/описания проектов).
+  const [tx, setTx] = useState({});
+  const translator = useRef(null);
+  if (!translator.current) translator.current = createTranslator();
   const { t, tr } = makeI18n(lang);
+
+  const translate = useCallback(
+    (text) => {
+      if (!text || typeof text !== "string") return text;
+      const base = tr(text); // словарь (дефолтные строки)
+      if (base !== text) return base;
+      // Пользовательский контент — онлайн-перевод (кэш → запрос)
+      if (lang === "ru") return text;
+      const cached = translator.current.get(text, lang);
+      if (cached) return cached;
+      translator.current.request(text, lang, (val) => {
+        setTx((prev) => ({ ...prev, [text + lang]: val }));
+      });
+      return text;
+    },
+    [tr, lang]
+  );
 
   useEffect(() => {
     document.documentElement.lang = langHtml(lang);
@@ -177,7 +199,7 @@ export function PortfolioProvider({ children }) {
 
   return (
     <Ctx.Provider
-      value={{ data, setProfile, setProjects, reset, lang, setLang, t, tr }}
+      value={{ data, setProfile, setProjects, reset, lang, setLang, t, tr: translate, tx }}
     >
       {children}
     </Ctx.Provider>
